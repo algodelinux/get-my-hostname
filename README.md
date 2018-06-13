@@ -12,12 +12,12 @@ Instalación
 
 La forma más sencilla de instalarlo es ejecutar los siguientes comandos:
 
-   $ wget --no-check-certificate -O /usr/local/sbin/get-my-hostname https://raw.githubusercontent.com/algodelinux/get-my-hostname/master/get-my-hostname
-   $ chmod 755 /usr/local/sbin/get-my-hostname
+   wget --no-check-certificate -O /usr/local/sbin/get-my-hostname https://raw.githubusercontent.com/algodelinux/get-my-hostname/master/get-my-hostname  
+   chmod 755 /usr/local/sbin/get-my-hostname  
   
 
 Uso                   
 ---
 
-   # get-my-hostname
+   get-my-hostname   
 
