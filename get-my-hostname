@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# get-my-hostname: Script que obtiene el nombre del equipo consultando al servidor DNS definido en DNSSERVER
+#
+# Esteban M. Navas <algodelinux@gmail.com>
+# Fecha creación:      08/07/2016
+# Última modificación: 12/06/2018
+
+DNSSERVER="servidor"
+
+INTERFACESUP=$(ip link show up|grep ^[0-9]| grep -v lo|cut -f2 -d":"|sed 's/^[ \t]*//')
+
+for INTERFACE in $INTERFACESUP; do
+
+   IP=$(ip addr show $INTERFACE | grep -v inet6 | grep 'inet' | sed 's/^[ \t]*//' | cut -f2 -d" " | cut -f1 -d"/")
+
+   if [ "$IP" ]; then
+      DOMAINNAME=$(nslookup $IP $DNSSERVER | grep name | sed -e 's/.*[ \t]\([^ \t]*\)\.$/\1/')
+      if [ $DOMAINNAME ]; then
+         HOSTNAME=${DOMAINNAME%.*}
+         # DOMAIN=${DOMAINNAME#*.}
+         echo $HOSTNAME
+      fi
+   fi
+done
